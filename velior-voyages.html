@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velior — Viajes de Lujo Exclusivos</title>
+    <meta name="description" content="Velior — Experiencias de viaje de lujo personalizadas. Destinos exclusivos, hoteles cinco estrellas and servicios de conserjería privada.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== RESET Y BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border-color: oklch(1 0 0 / 10%);
+            outline-color: oklch(0.623 0.214 259.815 / 50%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 1.6;
+            color: oklch(0.85 0.005 65);
+            background: oklch(0.10 0.022 255);
+        }
+
+        /* ===== VARIABLES CSS ===== */
+        :root {
+            --primary: oklch(0.72 0.09 75);
+            --primary-dark: oklch(0.62 0.08 75);
+            --background: oklch(0.10 0.022 255);
+            --background-light: oklch(0.12 0.025 255);
+            --text-primary: oklch(0.96 0.005 75);
+            --text-secondary: oklch(0.60 0.015 255);
+            --text-muted: oklch(0.50 0.015 255);
+            --border-color: oklch(1 0 0 / 8%);
+            --border-color-light: oklch(1 0 0 / 6%);
+            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+            --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        /* ===== TIPOGRAFÍA ===== */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            line-height: 1.1;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: var(--text-primary);
+        }
+
+        h2 {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            color: var(--text-primary);
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+        }
+
+        p {
+            line-height: 1.75;
+            color: var(--text-secondary);
+        }
+
+        em {
+            font-style: italic;
+            color: var(--primary);
+        }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 2rem;
+                max-width: 1280px;
+            }
+        }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: oklch(0.10 0.022 255 / 85%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 0;
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 32px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-links a {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 400;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 200ms ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn-nav {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 400;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 250ms ease;
+        }
+
+        .btn-nav:hover {
+            background: var(--primary);
+            color: oklch(0.10 0.022 255);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            background: url('https://d2xsxph8kpxj0f.cloudfront.net/310519663677202038/M6xxPdgtL5ViriWwu9p8gP/hero-bg-Ti8WnkGaTgsABBryUEU22X.webp') center/cover;
+            background-attachment: fixed;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, oklch(0.10 0.022 255 / 40%) 0%, oklch(0.08 0.02 255 / 60%) 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .hero-label {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 500;
+            font-size: 0.62rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-style: italic;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .hero-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 4rem;
+        }
+
+        @media (min-width: 640px) {
+            .hero-buttons {
+                flex-direction: row;
+            }
+        }
+
+        /* ===== BOTONES ===== */
+        .btn-primary {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 500;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 1rem 2.5rem;
+            background: var(--primary);
+            color: oklch(0.10 0.022 255);
+            border: 1px solid var(--primary);
+            cursor: pointer;
+            transition: all 250ms var(--ease-out);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--primary) / 30%;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.97);
+        }
+
+        .btn-secondary {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 400;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.875rem 2.5rem;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 250ms ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* ===== SECCIONES ===== */
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 500;
+            font-size: 0.62rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            margin: 1rem auto 1.5rem;
+        }
+
+        /* ===== GRID ===== */
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        @media (min-width: 768px) {
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        @media (min-width: 1024px) {
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--background-light);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            transition: all 300ms var(--ease-out);
+            position: relative;
+        }
+
+        .card:hover {
+            border-color: var(--primary) / 40%;
+            transform: translateY(-4px);
+        }
+
+        .card-highlight {
+            background: linear-gradient(135deg, oklch(0.16 0.03 255) 0%, oklch(0.14 0.025 255) 100%);
+            border-color: var(--primary) / 60%;
+            box-shadow: 0 0 60px var(--primary) / 12%;
+            transform: translateY(-12px);
+        }
+
+        /* ===== FILTROS ===== */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .filter-button {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 500;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.75rem 1.5rem;
+            background: var(--background-light);
+            border: 1px solid var(--primary) / 30%;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 250ms ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-button:hover {
+            border-color: var(--primary) / 60%;
+            background: oklch(0.14 0.025 255);
+        }
+
+        .filter-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 0.5rem;
+            background: var(--background-light);
+            border: 1px solid var(--primary) / 30%;
+            min-width: 250px;
+            box-shadow: 0 8px 32px oklch(0 0 0 / 40%);
+            z-index: 100;
+        }
+
+        .filter-option {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border-color-light);
+            color: var(--text-secondary);
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            font-size: 0.82rem;
+            transition: all 200ms ease;
+        }
+
+        .filter-option:last-child {
+            border-bottom: none;
+        }
+
+        .filter-option:hover {
+            background: oklch(0.14 0.025 255 / 50%);
+            color: var(--primary) / 80%;
+        }
+
+        .filter-option.active {
+            background: oklch(0.14 0.025 255);
+            color: var(--primary);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: oklch(0.06 0.018 255);
+            border-top: 1px solid var(--border-color-light);
+            padding: 4rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo-img {
+            height: 28px;
+            width: auto;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 200ms ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        /* ===== ANIMACIONES ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 700ms var(--ease-out) forwards;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 0;
+            }
+
+            .hero {
+                height: 80vh;
+            }
+
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="container">
+            <div class="navbar-container">
+                <a href="#inicio" class="logo-container">
+                    <img src="3.png" alt="Velior" class="logo-img">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#destinos">Destinos</a></li>
+                    <li><a href="#paquetes">Paquetes</a></li>
+                    <li><a href="#experiencias">Experiencias</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+                <button class="btn-nav">Reservar Ahora</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-label">Experiencias Exclusivas de Viaje</p>
+            <h1 class="hero-title">El Mundo es Tuyo.</h1>
+            <p class="hero-subtitle">Vívelo sin Límites.</p>
+            <p class="hero-description">
+                Diseñamos itinerarios únicos para viajeros que exigen lo extraordinario. Hoteles icónicos, vuelos privados y experiencias que trascienden lo imaginable.
+            </p>
+            <div class="hero-buttons">
+                <button class="btn-primary">Explorar Paquetes</button>
+                <button class="btn-secondary">Consulta Gratuita</button>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; text-align: center;">
+                <div>
+                    <p style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem;">500+</p>
+                    <p style="font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);">Destinos Exclusivos</p>
+                </div>
+                <div>
+                    <p style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem;">15K+</p>
+                    <p style="font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);">Viajeros Satisfechos</p>
+                </div>
+                <div>
+                    <p style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem;">20</p>
+                    <p style="font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);">Años de Experiencia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DESTINOS SECTION -->
+    <section id="destinos" style="background: oklch(0.08 0.02 255);">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Destinos Curados</p>
+                <div class="divider"></div>
+                <h2>Destinos que <em>Transforman</em></h2>
+                <p style="margin-top: 1rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+                    Cada destino es seleccionado por nuestros expertos para garantizar una experiencia verdaderamente excepcional.
+                </p>
+            </div>
+            <div class="grid grid-3">
+                <div class="card">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663677202038/M6xxPdgtL5ViriWwu9p8gP/dest-maldives-b8gfqEGGYGrMqVvsPk7RHD.webp" alt="Maldivas" style="width: 100%; height: 200px; object-fit: cover; margin-bottom: 1.5rem;">
+                    <p style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.5rem;">Desde $8,500</p>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Océano Índico</p>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Maldivas</h3>
+                    <p style="margin-bottom: 1rem;">Paraíso sobre el agua</p>
+                    <button class="btn-secondary" style="width: 100%;">Explorar Destino</button>
+                </div>
+                <div class="card">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663677202038/M6xxPdgtL5ViriWwu9p8gP/dest-santorini-oLBuW6JmD4oF3LBv3gWap7.webp" alt="Santorini" style="width: 100%; height: 200px; object-fit: cover; margin-bottom: 1.5rem;">
+                    <p style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.5rem;">Desde $5,200</p>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Grecia</p>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Santorini</h3>
+                    <p style="margin-bottom: 1rem;">La joya del Egeo</p>
+                    <button class="btn-secondary" style="width: 100%;">Explorar Destino</button>
+                </div>
+                <div class="card">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663677202038/M6xxPdgtL5ViriWwu9p8gP/dest-kyoto-7ubVoMRr2yACBxNRv4SPqG.webp" alt="Kioto" style="width: 100%; height: 200px; object-fit: cover; margin-bottom: 1.5rem;">
+                    <p style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.5rem;">Desde $6,800</p>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Japón</p>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Kioto</h3>
+                    <p style="margin-bottom: 1rem;">Tradición milenaria</p>
+                    <button class="btn-secondary" style="width: 100%;">Explorar Destino</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAQUETES SECTION -->
+    <section id="paquetes">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Nuestros Paquetes</p>
+                <div class="divider"></div>
+                <h2>Elige tu Nivel de <em>Excelencia</em></h2>
+                <p style="margin-top: 1rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+                    Cada paquete incluye la atención personalizada y el estándar de calidad que define a Velior.
+                </p>
+            </div>
+
+            <div class="filter-container">
+                <button class="filter-button" onclick="toggleFilter()">
+                    Ordenar: <span id="current-sort">Recomendado</span>
+                    <span>▼</span>
+                </button>
+                <div class="filter-dropdown" id="filter-dropdown" style="display: none;">
+                    <button class="filter-option active" onclick="sortPackages('relevance')">Recomendado</button>
+                    <button class="filter-option" onclick="sortPackages('price-asc')">Precio: Menor a Mayor</button>
+                    <button class="filter-option" onclick="sortPackages('price-desc')">Precio: Mayor a Menor</button>
+                    <button class="filter-option" onclick="sortPackages('duration-asc')">Duración: Más Corto</button>
+                    <button class="filter-option" onclick="sortPackages('duration-desc')">Duración: Más Largo</button>
+                </div>
+            </div>
+
+            <div class="grid grid-3" id="packages-grid">
+                <!-- Los paquetes se cargarán aquí con JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <img src="3.png" alt="Velior" class="footer-logo-img">
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                        Diseñamos experiencias de viaje extraordinarias para quienes exigen lo mejor. Veinte años creando momentos irrepetibles.
+                    </p>
+                </div>
+                <div>
+                    <h5 style="color: var(--primary); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem;">Destinos</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Maldivas</a></li>
+                        <li><a href="#">Santorini</a></li>
+                        <li><a href="#">Kioto</a></li>
+                        <li><a href="#">Safari Kenia</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 style="color: var(--primary); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem;">Servicios</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Vuelos Privados</a></li>
+                        <li><a href="#">Hoteles de Lujo</a></li>
+                        <li><a href="#">Yates Privados</a></li>
+                        <li><a href="#">Concierge VIP</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 style="color: var(--primary); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem;">Empresa</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Sobre Nosotros</a></li>
+                        <li><a href="#">Nuestro Equipo</a></li>
+                        <li><a href="#">Prensa</a></li>
+                        <li><a href="#">Sostenibilidad</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid var(--border-color-light); padding-top: 2rem; text-align: center;">
+                <p style="font-size: 0.75rem; color: var(--text-muted);">© 2026 Velior. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const packages = [
+            {
+                id: 1,
+                tier: "Signature",
+                tagline: "La esencia del lujo",
+                price: "$4,500",
+                priceNumeric: 4500,
+                duration: "5 días / 4 noches",
+                daysNumeric: 5,
+                features: ["Vuelos en clase business", "Hotel 5 estrellas", "Traslados privados", "Concierge 24/7", "Desayuno incluido", "Seguro premium"],
+                highlight: false
+            },
+            {
+                id: 2,
+                tier: "Grand Luxe",
+                tagline: "La experiencia definitiva",
+                price: "$9,800",
+                priceNumeric: 9800,
+                duration: "8 días / 7 noches",
+                daysNumeric: 8,
+                features: ["Vuelos primera clase", "Suite hotel colección", "Mayordomo privado", "Experiencias gastronómicas", "Excursiones privadas", "Spa incluido", "Helicóptero", "Concierge dedicado"],
+                highlight: true
+            },
+            {
+                id: 3,
+                tier: "Bespoke",
+                tagline: "Diseñado solo para ti",
+                price: "A medida",
+                priceNumeric: 15000,
+                duration: "Personalizable",
+                daysNumeric: 10,
+                features: ["Itinerario personalizado", "Jet privado", "Villas privadas", "Chef privado", "Eventos exclusivos", "Experiencias únicas", "Equipo dedicado", "Sin límites"],
+                highlight: false
+            }
+        ];
+
+        let currentSort = 'relevance';
+
+        function toggleFilter() {
+            const dropdown = document.getElementById('filter-dropdown');
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function sortPackages(sortType) {
+            currentSort = sortType;
+            let sorted = [...packages];
+
+            switch(sortType) {
+                case 'price-asc':
+                    sorted.sort((a, b) => a.priceNumeric - b.priceNumeric);
+                    document.getElementById('current-sort').textContent = 'Precio: Menor a Mayor';
+                    break;
+                case 'price-desc':
+                    sorted.sort((a, b) => b.priceNumeric - a.priceNumeric);
+                    document.getElementById('current-sort').textContent = 'Precio: Mayor a Menor';
+                    break;
+                case 'duration-asc':
+                    sorted.sort((a, b) => a.daysNumeric - b.daysNumeric);
+                    document.getElementById('current-sort').textContent = 'Duración: Más Corto';
+                    break;
+                case 'duration-desc':
+                    sorted.sort((a, b) => b.daysNumeric - a.daysNumeric);
+                    document.getElementById('current-sort').textContent = 'Duración: Más Largo';
+                    break;
+                default:
+                    sorted.sort((a, b) => {
+                        if (a.highlight && !b.highlight) return -1;
+                        if (!a.highlight && b.highlight) return 1;
+                        return a.id - b.id;
+                    });
+                    document.getElementById('current-sort').textContent = 'Recomendado';
+            }
+
+            renderPackages(sorted);
+            document.getElementById('filter-dropdown').style.display = 'none';
+        }
+
+        function renderPackages(packagesToRender) {
+            const grid = document.getElementById('packages-grid');
+            grid.innerHTML = packagesToRender.map(pkg => `
+                <div class="card ${pkg.highlight ? 'card-highlight' : ''}">
+                    ${pkg.highlight ? '<div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--primary); color: oklch(0.10 0.022 255); padding: 4px 12px; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; white-space: nowrap;">Más Elegido</div>' : ''}
+                    <h3 style="font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem;">${pkg.tier}</h3>
+                    <p style="font-style: italic; color: var(--text-muted); margin-bottom: 1.5rem;">${pkg.tagline}</p>
+                    <p style="font-size: 2.8rem; color: var(--text-primary); line-height: 1; margin-bottom: 0.5rem;">${pkg.price}</p>
+                    <p style="font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem;">${pkg.duration}</p>
+                    <div style="border-top: 1px solid var(--border-color); padding-top: 1.5rem; margin-bottom: 1.5rem;">
+                        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
+                            ${pkg.features.map(feat => `
+                                <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                                    <span style="color: var(--primary); flex-shrink: 0; margin-top: 3px;">✓</span>
+                                    <span style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">${feat}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    <button class="btn-primary" style="width: 100%; ${pkg.highlight ? 'background: var(--primary); color: oklch(0.10 0.022 255);' : ''}">${pkg.id === 3 ? 'Solicitar Cotización' : 'Reservar Ahora'}</button>
+                </div>
+            `).join('');
+        }
+
+        renderPackages(packages);
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.filter-container')) {
+                document.getElementById('filter-dropdown').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
